@@ -91,8 +91,8 @@ def check_diagonal_negative(board, row, col, player):
 
 def is_board_full(board):
     """Check if the board is full (draw condition)."""
-    for col in range(board.BOARD_COLS):
-        if board[0][col] == board.EMPTY:
+    for col in range(7):
+        if board[0][col] == 0:
             return False
     return True
 

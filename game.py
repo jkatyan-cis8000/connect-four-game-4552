@@ -3,12 +3,13 @@ import board
 
 def check_horizontal_win(board, row, col):
     """Check for a horizontal win starting from the last placed disc."""
+    from board import EMPTY
     player = board[row][col]
-    if player == board.EMPTY:
+    if player == EMPTY:
         return False
     
     count = 0
-    for c in range(board.BOARD_COLS):
+    for c in range(7):
         if board[row][c] == player:
             count += 1
             if count == 4:
@@ -20,8 +21,9 @@ def check_horizontal_win(board, row, col):
 
 def check_vertical_win(board, row, col):
     """Check for a vertical win starting from the last placed disc."""
+    from board import EMPTY
     player = board[row][col]
-    if player == board.EMPTY:
+    if player == EMPTY:
         return False
     
     count = 0
@@ -37,8 +39,9 @@ def check_vertical_win(board, row, col):
 
 def check_diagonal_win(board, row, col):
     """Check for a diagonal win in either direction."""
+    from board import EMPTY
     player = board[row][col]
-    if player == board.EMPTY:
+    if player == EMPTY:
         return False
     
     if check_diagonal_positive(board, row, col, player):
@@ -50,6 +53,7 @@ def check_diagonal_win(board, row, col):
 
 def check_diagonal_positive(board, row, col, player):
     """Check diagonal from top-left to bottom-right."""
+    from board import BOARD_COLS
     count = 0
     r, c = row, col
     while r >= 0 and c >= 0 and board[r][c] == player:
@@ -58,7 +62,7 @@ def check_diagonal_positive(board, row, col, player):
         c -= 1
     
     r, c = row + 1, col + 1
-    while r < board.BOARD_ROWS and c < board.BOARD_COLS and board[r][c] == player:
+    while r < 6 and c < BOARD_COLS and board[r][c] == player:
         count += 1
         r += 1
         c += 1
@@ -68,15 +72,16 @@ def check_diagonal_positive(board, row, col, player):
 
 def check_diagonal_negative(board, row, col, player):
     """Check diagonal from bottom-left to top-right."""
+    from board import BOARD_COLS
     count = 0
     r, c = row, col
-    while r < board.BOARD_ROWS and c >= 0 and board[r][c] == player:
+    while r < 6 and c >= 0 and board[r][c] == player:
         count += 1
         r += 1
         c -= 1
     
     r, c = row - 1, col + 1
-    while r >= 0 and c < board.BOARD_COLS and board[r][c] == player:
+    while r >= 0 and c < BOARD_COLS and board[r][c] == player:
         count += 1
         r -= 1
         c += 1
